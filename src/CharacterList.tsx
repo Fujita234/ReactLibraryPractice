@@ -16,7 +16,7 @@ interface CharacterListProps {
 }
 
 /**
- * 
+ * お試しのコンポーネント画面作りクラス
  */
 class CharacterList extends Component<CharacterListProps> {
   render() {
@@ -30,7 +30,7 @@ class CharacterList extends Component<CharacterListProps> {
             <Icon name="user circle" size="huge" />
             <Item.Content>
               <Item.Header>{c.name}</Item.Header>
-              <Item.Meta>{c.age}歳</Item.Meta>
+              <Item.Meta>{c.age}歳とっちゃったぷり〜</Item.Meta>
             </Item.Content>
           </Item>
         ))}
