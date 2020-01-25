@@ -5,9 +5,10 @@ import { Header, Icon, Item } from 'semantic-ui-react';
  * Characterのinterfaceを定義
  */
 export interface Character {
-  id: number,
-  name: string,
-  age: number,
+  id: number;
+  name: string;
+  age: number;
+  height?: number;
 }
 
 interface CharacterListProps {
@@ -31,6 +32,9 @@ class CharacterList extends Component<CharacterListProps> {
             <Item.Content>
               <Item.Header>{c.name}</Item.Header>
               <Item.Meta>{c.age}歳とっちゃったぷり〜</Item.Meta>
+              <Item.Meta>
+                {c.height ? c.height : '???'}cm
+              </Item.Meta>
             </Item.Content>
           </Item>
         ))}

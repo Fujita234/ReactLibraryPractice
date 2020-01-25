@@ -1,33 +1,66 @@
 import React, { Component } from 'react';
-import CharacterList, { Character } from './CharacterList';
-import logo from './logo.svg';
+import { Button, Card, Icon, Statistic } from 'semantic-ui-react'
+
 import './App.css';
 
-class App extends Component {
-  render() {
-    const charactors: Character[] = [
-      {
-        id: 1,
-        name: 'らぁら',
-        age: 10,
-      },
-      {
-        id: 2,
-        name: 'みれぃ',
-        age: 13,
-      },
-      {
-        id: 3,
-        name: 'ソフィ',
-        age: 14,
-      },
-    ];
+const LIMIT = 60;
+
+interface AppState {
+  timeLeft: number;
+}
+
+class App extends Component<{}, AppState> {
+  constructor(props: {}) {
+    super(props);
+    this.state = { timeLeft: LIMIT };
+  }
+
+  reset = () => {
+    this.setState({ timeLeft: LIMIT });
+  }
+
+  tick = () => {
+    this.setState(prevState => ({ timeLeft: prevState.timeLeft - 1}));
+  }
+
+  componentDidMount = () => {
+    this.timerId = setInterval(this.tick, 1000);
+  }
+
+  componentDidUpdate = () => {
+    const { timeLeft } = this.state;
+    if (timeLeft === 0) {
+      this.reset();
+    }
+  }
+
+  componentWillUnmount = () => {
+    clearInterval(this.timerId as NodeJS.Timer);
+  };
+
+  timerId?: NodeJS.Timer;
+
+  render () {
+    const { timeLeft } = this.state;
+
     return (
-      <div className="container">
+      <div className='container'>
         <header>
-          <h1>プリパラ</h1>
+          <h1>タイマー</h1>
         </header>
-        <CharacterList school="パプリカ学園" characters={charactors} />
+        <Card>
+          <Statistic className='number-board'>
+            <Statistic.Label>time</Statistic.Label>
+            <Statistic.Value>{timeLeft}</Statistic.Value>
+          </Statistic>
+          <Card.Content>
+            <Button color='red' fluid onClick={this.reset}>
+              <Icon name='redo'>
+                Reset
+              </Icon>
+            </Button>
+          </Card.Content>
+        </Card>
       </div>
     );
   }
