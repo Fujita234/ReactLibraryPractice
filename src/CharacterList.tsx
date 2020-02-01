@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { Header, Icon, Item } from 'semantic-ui-react';
+import ModalForm from './modal';
 
 export interface Character {
   id: number;
@@ -27,6 +28,7 @@ const CharacterList: FC<CharacterListProps> = ({
             <Item.Header>{c.name}</Item.Header>
               <Item.Meta>{c.age}歳</Item.Meta>
               <Item.Meta>{c.height ? c.height : '個人情報❤️'}cm</Item.Meta>
+              <Item.Meta><ModalForm></ModalForm></Item.Meta>
           </Item.Content>
         </Item>
       ))}

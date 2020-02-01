@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CharcterList, { Character } from './CharacterList';
 
 import './App.css';
+import { Modal } from 'semantic-ui-react';
 
 class App extends Component {
   render() {
